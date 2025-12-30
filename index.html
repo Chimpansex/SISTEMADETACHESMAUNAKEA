@@ -1,149 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Juzgado Mauna Kea – Versión Violenta</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Juzgado Mauna Kea</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-body {
-  background:#05224B;
-  font-family: 'Bangers', cursive;
-}
-.mauna-card {
-  background: rgba(5,34,75,.7);
-  border: 2px solid #5E2129;
-  box-shadow: 0 0 15px rgba(94,33,41,.6);
-}
-.loser-card {
-  background: rgba(94,33,41,.5);
-  border: 3px solid #ff0000;
-  box-shadow: 0 0 25px rgba(255,0,0,.7);
-  animation: pulse 1s infinite;
-}
-@keyframes pulse {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.05);}
-  100% {transform: scale(1);}
-}
-@keyframes shake {
-  0%{transform:translate(0)}
-  25%{transform:translate(-5px,5px)}
-  50%{transform:translate(5px,-5px)}
-  75%{transform:translate(-5px,-5px)}
-  100%{transform:translate(5px,5px)}
-}
-.shake {
-  animation: shake .4s infinite;
-}
-.screen-shake {
-  animation: shake .3s;
-}
-button {
-  transition: transform .1s;
-}
-button:active {
-  transform: scale(.9);
-}
-</style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #05224B;
+    }
+    .font-bangers {
+      font-family: 'Bangers', cursive;
+      letter-spacing: 1px;
+    }
+    .mauna-card {
+      background: rgba(5, 34, 75, 0.6);
+      border: 2px solid #5E2129;
+      box-shadow: 0 0 15px rgba(94, 33, 41, 0.5);
+    }
+    .mauna-card-loser {
+      background: rgba(94, 33, 41, 0.4);
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    }
+    @keyframes shake {
+      0% { transform: translate(1px, 1px); }
+      25% { transform: translate(-1px, -2px); }
+      50% { transform: translate(-3px, 1px); }
+      75% { transform: translate(3px, 2px); }
+      100% { transform: translate(1px, -1px); }
+    }
+    .shake {
+      animation: shake 0.5s infinite;
+    }
+  </style>
 </head>
 
 <body class="text-white min-h-screen">
 
-<div id="app" class="max-w-2xl mx-auto p-6">
+  <div class="max-w-2xl mx-auto p-6">
 
-<h1 class="text-5xl text-center mb-2">JUZGADO MAUNA KEA</h1>
-<p class="text-center text-red-300 mb-6">⚠️ NO APTO PARA ALMAS DÉBILES ⚠️</p>
+    <h1 class="text-5xl text-center font-bangers mb-2">
+      JUZGADO MAUNA KEA
+    </h1>
+    <p class="text-center text-blue-200 italic mb-8">
+      "La ley es dura, pero más dura…"
+    </p>
 
-<div id="banner" class="hidden loser-card p-4 rounded text-center mb-6">
-  <h2 class="text-2xl text-red-200">✂️ PELIGRO DE RAPADO ✂️</h2>
-  <p id="loserName" class="text-4xl mt-2 shake"></p>
-</div>
+    <!-- Banner -->
+    <div id="loserBanner" class="hidden mauna-card-loser p-4 rounded-lg text-center mb-6">
+      <h2 class="text-2xl text-red-300 font-bangers mb-1">
+        ✂️ PELIGRO DE RAPADO ✂️
+      </h2>
+      <p id="loserName" class="text-4xl font-bangers shake"></p>
+    </div>
 
-<div id="members" class="space-y-4"></div>
+    <!-- Lista -->
+    <div id="members" class="space-y-4"></div>
 
-<footer class="mt-10 text-center text-sm text-red-200">
-  MAUNA KEA HASTA EL FINAL ☠️
-</footer>
+    <!-- Reglas -->
+    <div class="mt-10 border border-[#5E2129] rounded-lg overflow-hidden">
+      <button onclick="toggleRules()" class="w-full p-4 bg-[#5E2129]/40">
+        📜 TABLAS DE LA LEY
+      </button>
+      <div id="rules" class="hidden p-4 text-sm text-blue-200 space-y-2">
+        <ul class="list-disc list-inside">
+          <li>Tolerancia de 5 minutos al llegar tarde.</li>
+          <li>Entrega de cargos viernes 23:59.</li>
+          <li>Uniforme incompleto.</li>
+          <li>Palabras antisonantes.</li>
+          <li>No dar asesoría cada 2 semanas.</li>
+          <li>No entregar entregables.</li>
+          <li>No llevar minutas.</li>
+          <li>Si tu asesoría no entrega algo.</li>
+        </ul>
+      </div>
+    </div>
 
-</div>
+    <footer class="mt-12 text-center text-blue-300 text-sm">
+      Escuadrón Mauna Kea © 2025
+    </footer>
 
-<!-- 🔊 SONIDOS -->
-<audio id="soundPlus" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
-<audio id="soundMinus" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
-<audio id="soundDanger" src="https://assets.mixkit.co/active_storage/sfx/2747/2747-preview.mp3"></audio>
+  </div>
 
-<script>
-const COST = 200;
+  <script>
+    const COST = 200;
+    const punishments = [
+      { min: 20, label: "¡ESCLAVO DE COCINA!", color: "text-red-400" },
+      { min: 15, label: "CÁRCEL DE CAMPAMENTO", color: "text-orange-400" },
+      { min: 10, label: "CÁRCEL DE JUNTA", color: "text-orange-300" },
+      { min: 5, label: "CINTURONAZOS", color: "text-yellow-400" },
+      { min: 3, label: "PAGA DESAYUNO", color: "text-yellow-200" },
+      { min: 1, label: "MULTADO", color: "text-blue-300" },
+      { min: 0, label: "HOMBRE KEA", color: "text-green-400" }
+    ];
 
-const punishments = [
-  { min:20, label:"ESCLAVO DE COCINA 💀", color:"text-red-500"},
-  { min:15, label:"CÁRCEL DE CAMPAMENTO 🔥", color:"text-orange-400"},
-  { min:10, label:"CÁRCEL DE JUNTA ⛓️", color:"text-orange-300"},
-  { min:5, label:"CINTURONAZOS 🩸", color:"text-yellow-400"},
-  { min:3, label:"PAGA DESAYUNO ☕", color:"text-yellow-200"},
-  { min:1, label:"MULTADO 💸", color:"text-blue-300"},
-  { min:0, label:"HOMBRE KEA 😇", color:"text-green-400"}
-];
+    const members = [
+      { id: 1, name: "DANIPAI", taches: 0 },
+      { id: 2, name: "SESHIO", taches: 0 },
+      { id: 3, name: "RICHI", taches: 0 },
+      { id: 4, name: "DANIKEY", taches: 0 },
+      { id: 5, name: "CHUNS", taches: 0 }
+    ];
 
-const members = [
-  {id:1,name:"DANIPAI",t:0},
-  {id:2,name:"SESHIO",t:0},
-  {id:3,name:"RICHI",t:0},
-  {id:4,name:"DANIKEY",t:0},
-  {id:5,name:"CHUNS",t:0}
-];
-
-function getPun(t){ return punishments.find(p=>t>=p.min); }
-
-function render(){
-  const wrap = document.getElementById("members");
-  wrap.innerHTML="";
-  const max = Math.max(...members.map(m=>m.t));
-  const losers = members.filter(m=>m.t===max && max>0);
-
-  const banner = document.getElementById("banner");
-  const loserName = document.getElementById("loserName");
-
-  if(losers.length===1){
-    banner.classList.remove("hidden");
-    loserName.textContent = losers[0].name;
-    document.getElementById("soundDanger").play();
-    document.body.classList.add("screen-shake");
-    setTimeout(()=>document.body.classList.remove("screen-shake"),300);
-  } else {
-    banner.classList.add("hidden");
-  }
-
-  members.forEach(m=>{
-    const p = getPun(m.t);
-    const card = document.createElement("div");
-    card.className = "mauna-card p-4 rounded flex justify-between items-center";
-
-    if(losers.length===1 && losers[0].id===m.id){
-      card.classList.add("loser-card");
+    function getPunishment(t) {
+      return punishments.find(p => t >= p.min);
     }
 
-    card.innerHTML = `
-      <div>
-        <h3 class="text-xl">${m.name}</h3>
-        <p class="${p.color} text-sm">${p.label}</p>
-        <p class="text-xs">Deuda: $${m.t * COST}</p>
-      </div>
-      <div class="flex items-center gap-3">
-        <button onclick="change(${m.id},-1)">➖</button>
-        <span class="text-3xl">${m.t}</span>
-        <button onclick="change(${m.id},1)">➕</button>
-      </div>
-    `;
-    wrap.appendChild(card);
-  });
-}
+    function render() {
+      const container = document.getElementById("members");
+      container.innerHTML = "";
 
-function change(id,n){
-  const m = members.find(x=>x.id===id);
-  m.
+      const max = Math.max(...members.map(m => m.taches));
+      const losers = members.filter(m => m.taches === max && max > 0);
 
+      const banner = document.getElementById("loserBanner");
+      const name = document.getElementById("loserName");
+
+      if (losers.length === 1) {
+        banner.classList.remove("hidden");
+        name.textContent = losers[0].name;
+      } else {
+        banner.classList.add("hidden");
+      }
+
+      members.forEach(m => {
+        const p = getPunishment(m.taches);
+        const div = document.createElement("div");
+        div.className = "mauna-card p-4 rounded flex justify-between items-center";
+
+        div.innerHTML = `
+          <div>
+            <h3 class="text-xl font-bangers">${m.name}</h3>
+            <p class="${p.color} text-sm">${p.label}</p>
+            <p class="text-xs text-blue-200">Deuda: $${m.taches * COST}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="change(${m.id}, -1)">➖</button>
+            <span class="text-2xl font-bold">${m.taches}</span>
+            <button onclick="change(${m.id}, 1)">➕</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function change(id, n) {
+      const m = members.find(x => x.id === id);
+      m.taches = Math.max(0, m.taches + n);
+      render();
+    }
+
+    function toggleRules() {
+      document.getElementById("rules").classList.toggle("hidden");
+    }
+
+    render();
+  </script>
+
+</body>
+</html>
